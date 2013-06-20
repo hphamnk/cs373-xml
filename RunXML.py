@@ -22,12 +22,10 @@ To document the program
 
 import sys
 
-# replace with xml stuff
-# from Collatz import collatz_solve
+from XML import xml_solve
 
 # ----
 # main
 # ----
 
-# replace with xml stuff
-# collatz_solve(sys.stdin, sys.stdout)
+xml_solve(sys.stdin, sys.stdout)
