@@ -1,0 +1,79 @@
+</THU>
+
+arrayReaderLength: 15
+xmlCounter 14
+xml: <THU>
+	<Team>
+		<ACRush></ACRush>
+		<Jelly></Jelly>
+		<Cooly></Cooly>
+	</Team>
+	<JiaJia>
+		<Team>
+			<Ahyangyi></Ahyangyi>
+			<Dragon></Dragon>
+			<Cooly><Amber></Amber></Cooly>
+		</Team>
+	</JiaJia>
+</THU>
+
+targetString: <Team><Cooly></Cooly></Team>
+
+root:  <Element 'THU' at 0x14b90d0>
+root.tag:  THU
+query2Root: <Element 'Team' at 0x14b96d0>
+query2Root.tag: Team
+Team
+Cooly
+queryLastElement: Cooly
+
+children of root (THU): 
+Team
+JiaJia
+getchildrenLength: 2
+--------------------------------------------------------------
+query: ['Team', 'Cooly', 'Amber']
+1 THU
+2 Team
+Team <Element 'Team' at 0x14b9110>
+xml_solve starts here ------------------------------
+tree: <Element 'Team' at 0x14b9110>
+target: ['Cooly', 'Amber'] length: 2
+tree: ACRush
+tree: Jelly
+tree: Cooly
+Cooly == Cooly
+recursive call
+xml_solve starts here ------------------------------
+tree: <Element 'Cooly' at 0x14b92d0>
+target: ['Amber'] length: 1
+did not find anything
+occurAtLine: 2
+0
+3 ACRush
+4 Jelly
+5 Cooly
+6 JiaJia
+7 Team
+Team <Element 'Team' at 0x14b9490>
+xml_solve starts here ------------------------------
+tree: <Element 'Team' at 0x14b9490>
+target: ['Cooly', 'Amber'] length: 2
+tree: Ahyangyi
+tree: Dragon
+tree: Cooly
+Cooly == Cooly
+recursive call
+xml_solve starts here ------------------------------
+tree: <Element 'Cooly' at 0x14b9550>
+target: ['Amber'] length: 1
+tree: Amber
+Amber == Amber
+found
+occurAtLine: 7
+1
+8 Ahyangyi
+9 Dragon
+10 Cooly
+11 Amber
+1
