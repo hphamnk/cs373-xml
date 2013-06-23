@@ -22,10 +22,10 @@ To document the program
 
 import sys
 
-from XML import xml_solve
+from XML import xml_handler, xml_reader
 
 # ----
 # main
 # ----
 
-xml_solve(sys.stdin, sys.stdout)
+xml_reader(sys.stdin, sys.stdout)
