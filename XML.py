@@ -11,12 +11,14 @@ def xml_handler (r, w) :
 	w is a writer
 	"""
 	querry = ["Team", "Cooly", "Amber"]
+	querryLength = len(querry)
 
 	tree = ET.ElementTree(ET.fromstring(r))
 	root = tree.getroot()
 	print "root: ", root
 	print "root.tag: ", root.tag
 	
+	"""
 	print "\nchildren + grandchildren: "
 	for x in root.iter():
 		print x.tag
@@ -28,6 +30,9 @@ def xml_handler (r, w) :
 	print "\nfind tag in children but not grandchildren"
 	for elem in root.findall(querry[0]):
 		print elem.tag
+	"""
+
+	"""
 	print "\nfind querry 0 and 1"
 	countOccur = 0
 	countNumber = 0
@@ -39,41 +44,47 @@ def xml_handler (r, w) :
 				countOccur += 1
 				print elem.tag
 				print "counterNumber: ", countNumber
-
-
 	print countOccur
+	"""
+
+
 	print "--------------------------------------------------------------"
 	print "querry:", querry
-	print "last element of list:", querry[-1]
-	print "next element of list:", querry[1:]
+	#print "last element of list:", querry[-1]
+	#print "next element of list:", querry[1:]
 	occurCount = 0
 	occurAtLine = 0
 	for x in root.iter():
 		occurAtLine += 1
 		if x.tag == querry[0]:
-			print x
-			occurCount += xml_solve(x, querry[1:],querry[-1])
-			print "occurAtLine:", occurAtLine
+			if querryLength == 1:
+				occurCount += 1
+			else:
+				print x.tag, x
+				occurCount += xml_solve(x, querry[1:],querry[-1])
+				print "occurAtLine:", occurAtLine
+				print occurCount
 	
 	print occurCount
 
 def xml_solve(tree, target, lastTarget):
-	
-	print "target:", target 
+	print "xml_solve starts here ------------------------------"
 	targetLength = len(target)
+	print "tree:", tree
+	print "target:", target, "length:", targetLength 
+
 	for x in tree.getchildren():
-		print x.tag
-		print target[0]
 		if x.tag == target[0]:
-			print "testing      ", x.tag, "==", target
-			if target == lastTarget:
+			print x.tag, "==", target[0]
+			if x.tag == lastTarget:
+				print "found"
 				return 1
-			elif targetLength >1:
-				return 0 + xml_solve(x, target[1:],lastTarget)
-			else:
-				return 0
-		else:
-			return 0
+			elif targetLength > 1:
+				print "recursive call"
+				return xml_solve(x, target[1:],lastTarget)
+	else:
+		print "did not find anything"
+		return 0
 
 def xml_reader(r,w):
 	arrayCount = 0
