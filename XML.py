@@ -12,7 +12,7 @@ def xml_handler (r, w) :
 	"""
 	querry = ["Team", "Cooly", "Amber"]
 
-	tree = ET.parse(r)
+	tree = ET.ElementTree(ET.fromstring(r))
 	root = tree.getroot()
 	print "root: ", root
 	print "root.tag: ", root.tag
@@ -95,3 +95,4 @@ def xml_reader(r,w):
 			break 
 
 	print xml
+	xml_handler(xml,w)
