@@ -17,37 +17,44 @@ xml: <THU>
 	</JiaJia>
 </THU>
 
-targetString: <Team><Cooly></Cooly></Team>
+targetString: <Team><Cooly><Amber></Amber></Cooly></Team>
 
-root:  <Element 'THU' at 0x14b90d0>
+root:  <Element 'THU' at 0x2a290d0>
 root.tag:  THU
-query2Root: <Element 'Team' at 0x14b96d0>
+rootLength: 2
+query2: <xml.etree.ElementTree.ElementTree object at 0x2a29790>
+query2Root: <Element 'Team' at 0x2a296d0>
 query2Root.tag: Team
-Team
-Cooly
-queryLastElement: Cooly
+query2Children: <bound method Element.getchildren of <Element 'Team' at 0x2a296d0>>
+children x.tag: Cooly
+targetChildren[x]: Cooly
+query iter: Team
+query iter: Cooly
+query iter: Amber
+queryLastElement: Amber
+query2Lengh: 3
 
 children of root (THU): 
 Team
 JiaJia
 getchildrenLength: 2
 --------------------------------------------------------------
-query: ['Team', 'Cooly', 'Amber']
 1 THU
 2 Team
-Team <Element 'Team' at 0x14b9110>
+Team <Element 'Team' at 0x2a29110>
+
 xml_solve starts here ------------------------------
-tree: <Element 'Team' at 0x14b9110>
-target: ['Cooly', 'Amber'] length: 2
-tree: ACRush
-tree: Jelly
-tree: Cooly
-Cooly == Cooly
-recursive call
-xml_solve starts here ------------------------------
-tree: <Element 'Cooly' at 0x14b92d0>
-target: ['Amber'] length: 1
-did not find anything
+tree: <Element 'Team' at 0x2a29110>
+target: <Element 'Team' at 0x2a296d0> length: 3
+xml_solve_targetChildren[x]: <Element 'Cooly' at 0x2a29710>
+targetGrandChild: <Element 'Amber' at 0x2a29750>
+children + grandchildren of target: 
+Team
+Cooly
+Amber
+targetTotalLength: 3
+found a match: Cooly == <Element 'Cooly' at 0x2a29710>
+didnt find anything
 occurAtLine: 2
 0
 3 ACRush
@@ -55,25 +62,24 @@ occurAtLine: 2
 5 Cooly
 6 JiaJia
 7 Team
-Team <Element 'Team' at 0x14b9490>
+Team <Element 'Team' at 0x2a29490>
+
 xml_solve starts here ------------------------------
-tree: <Element 'Team' at 0x14b9490>
-target: ['Cooly', 'Amber'] length: 2
-tree: Ahyangyi
-tree: Dragon
-tree: Cooly
-Cooly == Cooly
-recursive call
-xml_solve starts here ------------------------------
-tree: <Element 'Cooly' at 0x14b9550>
-target: ['Amber'] length: 1
-tree: Amber
-Amber == Amber
-found
+tree: <Element 'Team' at 0x2a29490>
+target: <Element 'Team' at 0x2a296d0> length: 3
+xml_solve_targetChildren[x]: <Element 'Cooly' at 0x2a29710>
+targetGrandChild: <Element 'Amber' at 0x2a29750>
+children + grandchildren of target: 
+Team
+Cooly
+Amber
+targetTotalLength: 3
+found a match: Cooly == <Element 'Cooly' at 0x2a29710>
+didnt find anything
 occurAtLine: 7
-1
+0
 8 Ahyangyi
 9 Dragon
 10 Cooly
 11 Amber
-1
+occurCount: 0
