@@ -2,7 +2,7 @@
 	<Team>
 		<ACRush></ACRush>
 		<Jelly></Jelly>
-		<Cooly></Cooly>
+		<Cooly><Team></Team></Cooly>
 	</Team>
 	<JiaJia>
 		<Team>

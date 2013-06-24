@@ -10,9 +10,6 @@ def xml_handler (r, w) :
 	r is a reader
 	w is a writer
 	"""
-	query = ["Team", "Cooly", "Amber"]
-	queryLength = len(query)
-
 	tree = ET.ElementTree(ET.fromstring(r))
 	root = tree.getroot()
 	print "root: ", root
@@ -20,38 +17,27 @@ def xml_handler (r, w) :
 	rootLength = len(root)
 	print "rootLength:", rootLength
 
-	query2 = ET.ElementTree(ET.fromstring(w))
-	query2Root = query2.getroot()
-	print "query2:", query2
-	print "query2Root:", query2Root
-	print "query2Root.tag:", query2Root.tag
-	query2Children = query2Root.getchildren
-	print "query2Children:", query2Children 
-
-	targetChildren = {}
-	for x in query2Root.getchildren():
-		targetChildren[x] = x.tag
-		print "children x.tag:", x.tag
-
-	for x in targetChildren:
-		print "targetChildren[x]:", targetChildren[x]
+	query = ET.ElementTree(ET.fromstring(w))
+	queryRoot = query.getroot()
+	print "queryRoot:", queryRoot
+	print "queryRoot.tag:", queryRoot.tag
 
 	queryLastElement = ""
-	query2Lengh = 0
-	for x in query2Root.iter():
-		print "query iter:", x.tag
+	queryLength = 0
+	for x in queryRoot.iter():
+		queryLength += 1
+		print "queryItem #", queryLength, ":", x.tag
 		queryLastElement = x.tag
-		query2Lengh += 1
 	print "queryLastElement:", queryLastElement
-	print "query2Lengh:", query2Lengh
+	print "queryLength:", queryLength
 
+	"""
 	print "\nchildren of root (THU): "
 	for elem in root.getchildren():
 		print elem.tag
 	getchildrenLength = len(root.getchildren())
 	print "getchildrenLength:", getchildrenLength
-
-	"""
+	
 	print "\nfind tag in children but not grandchildren"
 	for elem in root.findall(query[0]):
 		print elem.tag
@@ -72,30 +58,28 @@ def xml_handler (r, w) :
 
 
 	print "--------------------------------------------------------------"
-	#print "query:", query
-	#print "last element of list:", query[-1]
-	#print "next element of list:", query[1:]
 	occurCount = 0
 	occurAtLine = 0
 	for x in root.iter():
 		occurAtLine += 1
-		#print occurAtLine, x.tag
-		if x.tag == query2Root.tag:
+		#print "line:", occurAtLine, "item:", x.tag
+		if x.tag == queryRoot.tag:
+			#print "found:", x.tag, "==", queryRoot.tag
 			if queryLength == 1:
 				occurCount += 1
+				print "occurAtLine:", occurAtLine
 			else:
-				print "x.tag:", x.tag, "x:", x
-				#occurCount += xml_solve(x, query[1:],queryLastElement)
-				occurCount += xml_solve(x, query2Root,queryLastElement)
+				occurCount += xml_solve(x, queryRoot,queryLastElement)
 				print "occurAtLine:", occurAtLine
 				print "occurCount:", occurCount
+				#print "          ---------- xml_solve ends ----------     "
 	
 	print "final occurCount:", occurCount
 
 #-------------------------------------------------------------------------------------------
 
 def xml_solve(tree, target, lastTarget):
-	print "\nxml_solve starts here ------------------------------"
+	print "\n-------------------- xml_solve starts --------------------"
 	targetLength = len(target)
 	print "tree:", tree
 	print "target:", target, "lastTarget:", lastTarget
@@ -133,8 +117,10 @@ def xml_solve(tree, target, lastTarget):
 	# assume there is only 1 child per level
 	for x in tree.getchildren():
 		if x.tag == xml_solve_targetChildren[0].tag:
-			print "found a match:", x.tag, "==", xml_solve_targetChildren[0]
-			if x.tag == lastTarget:
+			print "---------------found a match:", x.tag, "==", xml_solve_targetChildren[0]
+			print "children of xml_solve_targetChildren[0]:", xml_solve_targetChildren[0].getchildren()
+			#if x.tag == lastTarget:
+			if xml_solve_targetChildren[0].getchildren() == []:
 				print "found whole query"
 				return 1 
 			
