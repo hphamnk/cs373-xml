@@ -12,24 +12,29 @@ def xml_handler (r, w) :
 	"""
 	tree = ET.ElementTree(ET.fromstring(r))
 	root = tree.getroot()
-	print "root: ", root
-	print "root.tag: ", root.tag
+#	print "root: ", root
+#	print "root.tag: ", root.tag
 	rootLength = len(root)
-	print "rootLength:", rootLength
+#	print "rootLength:", rootLength
 
 	query = ET.ElementTree(ET.fromstring(w))
 	queryRoot = query.getroot()
-	print "queryRoot:", queryRoot
-	print "queryRoot.tag:", queryRoot.tag
+#	print "queryRoot:", queryRoot
+#	print "queryRoot.tag:", queryRoot.tag
 
 	queryLastElement = ""
 	queryLength = 0
 	for x in queryRoot.iter():
 		queryLength += 1
-		print "queryItem #", queryLength, ":", x.tag
+#		print "queryItem #", queryLength, ":", x.tag
 		queryLastElement = x.tag
-	print "queryLastElement:", queryLastElement
-	print "queryLength:", queryLength
+#	print "queryLastElement:", queryLastElement
+#	print "queryLength:", queryLength
+
+	rootNumber = 0
+	for x in root.iter():
+		rootNumber += 1
+#		print "rootNumber:", rootNumber, x.tag
 
 	"""
 	print "\nchildren of root (THU): "
@@ -57,9 +62,11 @@ def xml_handler (r, w) :
 	"""
 
 
-	print "--------------------------------------------------------------"
+#	print "--------------------------------------------------------------"
+	answer = {}
 	occurCount = 0
 	occurAtLine = 0
+	occurSolve = 0 
 	for x in root.iter():
 		occurAtLine += 1
 		#print "line:", occurAtLine, "item:", x.tag
@@ -67,32 +74,39 @@ def xml_handler (r, w) :
 			#print "found:", x.tag, "==", queryRoot.tag
 			if queryLength == 1:
 				occurCount += 1
-				print "occurAtLine:", occurAtLine
+#				print "occurAtLine:", occurAtLine
 			else:
-				occurCount += xml_solve(x, queryRoot,queryLastElement)
-				print "occurAtLine:", occurAtLine
-				print "occurCount:", occurCount
+				occurSolve = xml_solve(x, queryRoot,queryLastElement)
+				occurCount += occurSolve
+#				print "occurCount:", occurCount
+				if occurSolve != 0:
+					answer[occurCount] = occurAtLine
+#					print "---------------------occurAtLine:", occurAtLine, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 				#print "          ---------- xml_solve ends ----------     "
 	
-	print "final occurCount:", occurCount
+	answer[0] = occurCount
+#	print "final occurCount:", occurCount
+
+	return answer
 
 #-------------------------------------------------------------------------------------------
 
 def xml_solve(tree, target, lastTarget):
-	print "\n-------------------- xml_solve starts --------------------"
+#	print "\n-------------------- xml_solve starts --------------------"
 	targetLength = len(target)
-	print "tree:", tree
-	print "target:", target, "lastTarget:", lastTarget
+#	print "tree:", tree
+#	print "target:", target, "lastTarget:", lastTarget
 
 	xml_solve_targetChildren = {0:0}
-	targetKey = 0
+	targetChildrenNum = 0
 	for x in target.getchildren():
-		xml_solve_targetChildren[targetKey] = x
+		xml_solve_targetChildren[targetChildrenNum] = x
 		#print x.list(elem)
-		targetKey += 1 
+		targetChildrenNum += 1 
+#	print "targetChildrenNum:", targetChildrenNum 
 
-	for x in xml_solve_targetChildren:
-		print "xml_solve_targetChildren[x]:", xml_solve_targetChildren[x]
+#	for x in xml_solve_targetChildren:
+#		print "xml_solve_targetChildren[x]:", xml_solve_targetChildren[x]
 
 	"""
 	targetGrandChild = 0
@@ -102,11 +116,11 @@ def xml_solve(tree, target, lastTarget):
 	"""
 
 	targetTotalLength = 0
-	print "children + grandchildren of target: "
+#	print "children + grandchildren of target: "
 	for x in target.iter():
 		targetTotalLength += 1
-		print x.tag
-	print "targetTotalLength:", targetTotalLength
+#		print x.tag
+#	print "targetTotalLength:", targetTotalLength
 
 	""""  
 	same level do later	
@@ -117,19 +131,19 @@ def xml_solve(tree, target, lastTarget):
 	# assume there is only 1 child per level
 	for x in tree.getchildren():
 		if x.tag == xml_solve_targetChildren[0].tag:
-			print "---------------found a match:", x.tag, "==", xml_solve_targetChildren[0]
-			print "children of xml_solve_targetChildren[0]:", xml_solve_targetChildren[0].getchildren()
+#			print "---------------found a match:", x.tag, "==", xml_solve_targetChildren[0]
+#			print "children of xml_solve_targetChildren[0]:", xml_solve_targetChildren[0].getchildren()
 			#if x.tag == lastTarget:
 			if xml_solve_targetChildren[0].getchildren() == []:
-				print "found whole query"
+#				print "found whole query"
 				return 1 
 			
 			elif targetTotalLength > 1:
-				print "call recursively"
+#				print "call recursively"
 				return xml_solve(x, xml_solve_targetChildren[0], lastTarget)
 			
 	else:
-		print "didnt find anything"
+#		print "didnt find anything"
 		return 0
 
 	"""
@@ -159,9 +173,10 @@ def xml_reader(r,w):
 		arrayCount += 1
 
 	root = "".join(arrayReader[0])
+#	print "start root:", root
 	root = root.strip("<")
 	root = "</" + root
-	print root
+#	print "end root:", root
 
 	xml = ""
 	xmlCounter = 0
@@ -173,13 +188,17 @@ def xml_reader(r,w):
 			break
 
 	arrayReaderLength = len(arrayReader)
-	print "arrayReaderLength:", arrayReaderLength
-	print "xmlCounter", xmlCounter
+#	print "arrayReaderLength:", arrayReaderLength
+#	print "xmlCounter", xmlCounter
 
 	for x in range(xmlCounter, arrayReaderLength, 1):
 		targetString += "".join(arrayReader[x])
 
-	print "xml:", xml
-	print "targetString:", targetString
+#	print "xml:", xml
+#	print "targetString:", targetString
 
-	xml_handler(xml,targetString)
+	answer = xml_handler(xml,targetString)
+
+#	print "\nanswer :"
+	for x in answer:
+		print answer[x]
