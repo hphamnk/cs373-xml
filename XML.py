@@ -5,17 +5,33 @@ import xml.etree.ElementTree as ET
 # XML_solve
 # -------------
 
-def xml_handler (xmlString) :
+def xml_handler (xml_string) :
 	"""
+	xml_string = string that holds the input
+	convert xml_string into a tree
+	get its children
+	child 0 = xml tree, child 1 = query
+	occurCount = occurences of query in xml tree
+	occurAtLine = querry occurs at line
+	if query has only 1 item
+		check for that item in xml tree 
+		keep track of occurCount, occurAtLine
+	if query has more than 1 item
+		check for the first item in xml tree
+		call xml_solve, pass in current x element in xml tree and query
+		if xml_solve sees that current x element has all items in the query
+			keep track occurCount, occurAtLine
+	return occurCount and occurAtLine
 
 	"""
-	tree = ET.ElementTree(ET.fromstring(xmlString))
+	tree = ET.ElementTree(ET.fromstring(xml_string))
 	treeRoot = tree.getroot()
-#	print "treeRoot: ", treeRoot
+	#print "treeRoot: ", treeRoot
 	rootLength = len(treeRoot)
-#	print "rootLength:", rootLength
+	#print "rootLength:", rootLength
 
-	if treeRoot.getchildren() == []:
+	#print "invalid input"
+	if len(treeRoot.getchildren()) == 0 or len(treeRoot.getchildren()) == 1 :
 		return {0:0}
 
 	xmlAndQuery = {}
@@ -26,11 +42,11 @@ def xml_handler (xmlString) :
 
 	xml = xmlAndQuery[0]
 	query = xmlAndQuery[1]
-#	print xml
-#	print query
+	#print "xml:", xml
+	#print "query:", query
 
 	queryLength = len(query)
-#	print "queryLength:", queryLength
+	#print "queryLength:", queryLength
 
 	answer = {}
 	occurCount = 0
@@ -44,82 +60,100 @@ def xml_handler (xmlString) :
 			if queryLength == 0:
 				occurCount += 1
 				answer[occurCount] = occurAtLine
-#				print "occurAtLine:", occurAtLine
+				#print "occurAtLine:", occurAtLine
 			else:
 				occurSolve = xml_solve(x, query)
 				occurCount += occurSolve
 				if occurSolve != 0:
 					answer[occurCount] = occurAtLine
-#					print "---------------------occurAtLine:", occurAtLine, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-				#print "          ---------- xml_solve ends ----------     "
+					#print "occurAtLine:", occurAtLine
 	
 	answer[0] = occurCount
-#	print "final occurCount:", occurCount
-
+	#print "final occurCount:", occurCount
 	return answer
 	
 
-#-------------------------------------------------------------------------------------------
+def xml_solve(xmlS, queryS):
+	"""
+	xmlS = xml tree
+	querryS = querry
+	find children of querryS since the parent is found in xml_handler
+	get the querryS_length
+	find the element in xml tree that matches the child of queryS
+		if child of queryS has no children then we are at the end of query
+			return 1
+		if queryS_length is more than 1, we still have more elements to search for
+			call xml_solve recursively, passing in the chilren of queryS
+		else, we didnt find anything
+			return 0
+	"""
+	#print "\n-------------------- xml_solve starts --------------------"
+	#print "xmlS:", xmlS
+	#print "queryS:", queryS
 
-def xml_solve(tree, target):
-#	print "\n-------------------- xml_solve starts --------------------"
-	targetLength = len(target)
-#	print "tree:", tree
-#	print "target:", target, "lastTarget:", lastTarget
+	queryS_Children = {0:0}
+	queryS_Children_count = 0
+	for x in queryS.getchildren():
+		queryS_Children[queryS_Children_count] = x
+		queryS_Children_count += 1 
+	#print "queryS_Children_count:", queryS_Children_count 
 
-	xml_solve_targetChildren = {0:0}
-	targetChildrenNum = 0
-	for x in target.getchildren():
-		xml_solve_targetChildren[targetChildrenNum] = x
-		#print x.list(elem)
-		targetChildrenNum += 1 
-#	print "targetChildrenNum:", targetChildrenNum 
+	queryS_length = 0
+	#print "children + grandchildren of queryS:"
+	for x in queryS.iter():
+		#print queryS_length, x.tag
+		queryS_length += 1
+	#print "queryS_length:", queryS_length
 
-	targetTotalLength = 0
-#	print "children + grandchildren of target: "
-	for x in target.iter():
-#		print targetTotalLength, x.tag
-		targetTotalLength += 1
-#	print "targetTotalLength:", targetTotalLength
-
-
-	# assume there is only 1 child per level
-	for x in tree.getchildren():
-		if x.tag == xml_solve_targetChildren[0].tag:
-#			print "---------------found a match:", x.tag, "==", xml_solve_targetChildren[0]
-			if xml_solve_targetChildren[0].getchildren() == []:
-#				print "found whole query"
+	for x in xmlS.getchildren():
+		if x.tag == queryS_Children[0].tag:
+			#print "found a match:", x.tag, "==", queryS_Children[0]
+			if queryS_Children[0].getchildren() == []:
+				#print "found whole query"
 				return 1 
-			elif targetTotalLength > 1:
-#				print "call recursively"
-				return xml_solve(x, xml_solve_targetChildren[0])
+			elif queryS_length > 1:
+				#print "call recursively"
+				return xml_solve(x, queryS_Children[0])
 	else:
-#		print "didnt find anything"
+		#print "didnt find anything"
 		return 0
 
-#-------------------------------------------------------------------------------------------
 
 def xml_reader (r,w):
+	"""
+	r = reader
+	w = writer
+	concatenate every line in the file into a string until empty line
+		1. wrap <hphamnk> and </hphamnk> around the string
+		2. <hphamnk> is the new root, with xml tree as child 0 and query as child 1
+		3. then pass that string into xml_handler
+		4. print the answer from xml_handler
+	then do step 1-4 again to get the last input from the file
 
+	"""
 	arrayCount = 0
-	xmlString = "<hphamnk>"
+	xml_string = "<hphamnk>"
 	for x in r:
 		arrayCount += 1
-		xmlString += x
+		xml_string += x
 		if x.isspace():
-			xmlString += "</hphamnk>"
-			#print "blank line at:", arrayCount, "\n", xmlString
-			#answer = xml_handler(xmlString)
+			xml_string += "</hphamnk>"
+			xml_printer(w, xml_handler(xml_string))
+			xml_string = "<hphamnk>"
+			#answer = xml_handler(xml_string)
 			#print answer
-			xml_printer(w, xml_handler(xmlString))
-			xmlString = "<hphamnk>"
 	else:
-		xmlString += "</hphamnk>"
-		xml_printer(w, xml_handler(xmlString))
-		#answer = xml_handler(xmlString)
+		xml_string += "</hphamnk>"
+		xml_printer(w, xml_handler(xml_string))
+		#answer = xml_handler(xml_string)
 		#print answer
 
 def xml_printer (w, answer):
+	"""
+	w = writer
+	answer = dictionary that holds the items to print
+	go through answer and print out every item in that dictionary
+	"""
 	for x in answer:
 		w.write(str(answer[x]) + "\n")
 	w.write("\n")
