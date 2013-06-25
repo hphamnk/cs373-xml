@@ -1,85 +1,15 @@
-</THU>
+2
+2
+10
 
-arrayReaderLength: 15
-xmlCounter 14
-xml: <THU>
-	<Team>
-		<ACRush></ACRush>
-		<Jelly></Jelly>
-		<Cooly></Cooly>
-	</Team>
-	<JiaJia>
-		<Team>
-			<Ahyangyi></Ahyangyi>
-			<Dragon></Dragon>
-			<Cooly><Amber></Amber></Cooly>
-		</Team>
-	</JiaJia>
-</THU>
+2
+2
+7
 
-targetString: <Team><Cooly><Amber></Amber></Cooly></Team>
+1
+10
 
-root:  <Element 'THU' at 0x2a290d0>
-root.tag:  THU
-rootLength: 2
-query2: <xml.etree.ElementTree.ElementTree object at 0x2a29790>
-query2Root: <Element 'Team' at 0x2a296d0>
-query2Root.tag: Team
-query2Children: <bound method Element.getchildren of <Element 'Team' at 0x2a296d0>>
-children x.tag: Cooly
-targetChildren[x]: Cooly
-query iter: Team
-query iter: Cooly
-query iter: Amber
-queryLastElement: Amber
-query2Lengh: 3
+2
+2
+7
 
-children of root (THU): 
-Team
-JiaJia
-getchildrenLength: 2
---------------------------------------------------------------
-1 THU
-2 Team
-Team <Element 'Team' at 0x2a29110>
-
-xml_solve starts here ------------------------------
-tree: <Element 'Team' at 0x2a29110>
-target: <Element 'Team' at 0x2a296d0> length: 3
-xml_solve_targetChildren[x]: <Element 'Cooly' at 0x2a29710>
-targetGrandChild: <Element 'Amber' at 0x2a29750>
-children + grandchildren of target: 
-Team
-Cooly
-Amber
-targetTotalLength: 3
-found a match: Cooly == <Element 'Cooly' at 0x2a29710>
-didnt find anything
-occurAtLine: 2
-0
-3 ACRush
-4 Jelly
-5 Cooly
-6 JiaJia
-7 Team
-Team <Element 'Team' at 0x2a29490>
-
-xml_solve starts here ------------------------------
-tree: <Element 'Team' at 0x2a29490>
-target: <Element 'Team' at 0x2a296d0> length: 3
-xml_solve_targetChildren[x]: <Element 'Cooly' at 0x2a29710>
-targetGrandChild: <Element 'Amber' at 0x2a29750>
-children + grandchildren of target: 
-Team
-Cooly
-Amber
-targetTotalLength: 3
-found a match: Cooly == <Element 'Cooly' at 0x2a29710>
-didnt find anything
-occurAtLine: 7
-0
-8 Ahyangyi
-9 Dragon
-10 Cooly
-11 Amber
-occurCount: 0

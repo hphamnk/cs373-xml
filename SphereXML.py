@@ -1,6 +1,3 @@
-import xml.etree.ElementTree as ET
-
-
 # -------------
 # XML_solve
 # -------------
@@ -14,9 +11,6 @@ def xml_handler (xmlString) :
 #	print "treeRoot: ", treeRoot
 	rootLength = len(treeRoot)
 #	print "rootLength:", rootLength
-
-	if treeRoot.getchildren() == []:
-		return {0:0}
 
 	xmlAndQuery = {}
 	xmlAndQueryCounter = 0
@@ -101,6 +95,7 @@ def xml_solve(tree, target):
 
 def xml_reader (r,w):
 
+
 	arrayCount = 0
 	xmlString = "<hphamnk>"
 	for x in r:
@@ -111,15 +106,47 @@ def xml_reader (r,w):
 			#print "blank line at:", arrayCount, "\n", xmlString
 			#answer = xml_handler(xmlString)
 			#print answer
-			xml_printer(w, xml_handler(xmlString))
+			xml_printer(w, xml_handler(xmlString), "\n")
 			xmlString = "<hphamnk>"
 	else:
 		xmlString += "</hphamnk>"
-		xml_printer(w, xml_handler(xmlString))
+		xml_printer(w, xml_handler(xmlString), "")
 		#answer = xml_handler(xmlString)
 		#print answer
 
-def xml_printer (w, answer):
+def xml_printer (w, answer, newline):
 	for x in answer:
 		w.write(str(answer[x]) + "\n")
-	w.write("\n")
+	w.write(newline)
+
+
+#!/usr/bin/env python
+
+# ------------------------------
+# projects/collatz/RunCollatz.py
+# Copyright (C) 2013
+# Glenn P. Downing
+# -------------------------------
+
+"""
+To run the program
+    % python RunCollatz.py < RunCollatz.in > RunCollatz.out
+    % chmod ugo+x RunCollatz.py
+    % RunCollatz.py < RunCollatz.in > RunCollatz.out
+
+To document the program
+    % pydoc -w Collatz
+"""
+
+# -------
+# imports
+# -------
+
+import sys
+import xml.etree.ElementTree as ET
+
+# ----
+# main
+# ----
+
+xml_reader(sys.stdin, sys.stdout)

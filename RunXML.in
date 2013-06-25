@@ -1,6 +1,6 @@
 <THU>
 	<Team>
-		<ACRush></ACRush>
+		<ACRush><test1></test1><test2></test2></ACRush>
 		<Jelly></Jelly>
 		<Cooly><Team></Team></Cooly>
 	</Team>
@@ -9,7 +9,57 @@
 			<Ahyangyi></Ahyangyi>
 			<Dragon></Dragon>
 			<Cooly><Amber><Kobe></Kobe></Amber></Cooly>
+			<ACRush><test1></test1><test2></test2></ACRush>
+			<Jelly></Jelly>
 		</Team>
 	</JiaJia>
 </THU>
-<Team><Cooly><Amber><Kobe></Kobe></Amber></Cooly></Team>
+<Team><ACRush><test1></test1><test2></test2></ACRush><Jelly></Jelly></Team>
+
+<THU>
+	<Team>
+		<ACRush></ACRush>
+		<Jelly></Jelly>
+		<Cooly></Cooly>
+	</Team>
+	<JiaJia>
+		<Team>
+			<Ahyangyi></Ahyangyi>
+			<Dragon></Dragon>
+			<Cooly><Amber></Amber></Cooly>
+		</Team>
+	</JiaJia>
+</THU>
+<Team><Cooly></Cooly></Team>
+
+<THU>
+	<Team>
+		<ACRush></ACRush>
+		<Jelly></Jelly>
+		<Cooly></Cooly>
+	</Team>
+	<JiaJia>
+		<Team>
+			<Ahyangyi></Ahyangyi>
+			<Dragon></Dragon>
+			<Cooly><Amber></Amber></Cooly>
+		</Team>
+	</JiaJia>
+</THU>
+<Cooly><Amber></Amber></Cooly>
+
+<THU>
+	<Team>
+		<ACRush></ACRush>
+		<Jelly></Jelly>
+		<Cooly></Cooly>
+	</Team>
+	<JiaJia>
+		<Team>
+			<Ahyangyi></Ahyangyi>
+			<Dragon></Dragon>
+			<Cooly><Amber></Amber></Cooly>
+		</Team>
+	</JiaJia>
+</THU>
+<Team></Team>

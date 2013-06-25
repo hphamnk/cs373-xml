@@ -22,7 +22,7 @@ To document the program
 
 import sys
 
-from XML import xml_handler, xml_reader
+from XML import xml_reader
 
 # ----
 # main
