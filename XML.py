@@ -22,16 +22,15 @@ def xml_reader (r,w):
 		arrayCount += 1
 		xml_string += x
 		if x.isspace():
+			assert x.isspace()
 			xml_string += "</hphamnk>"
 			xml_printer(w, xml_handler(xml_string))
 			xml_string = "<hphamnk>"
-			#answer = xml_handler(xml_string)
-			#print answer
+			assert xml_string == "<hphamnk>"
+
 	else:
 		xml_string += "</hphamnk>"
 		xml_printer(w, xml_handler(xml_string))
-		#answer = xml_handler(xml_string)
-		#print answer
 
 
 # -------------
@@ -74,12 +73,14 @@ def xml_handler (xml_string) :
 	"""
 	tree = ET.ElementTree(ET.fromstring(xml_string))
 	treeRoot = tree.getroot()
-	#print "treeRoot: ", treeRoot
 
 	#print "invalid input" 
 	#when given an input without a xml tree or query or both
-	if len(treeRoot.getchildren()) == 0 or len(treeRoot.getchildren()) == 1 :
+	treeLength = len(treeRoot.getchildren())
+	if treeLength == 0 or treeLength == 1 :
 		return {0:0}
+
+	assert treeLength > 1
 
 	xmlAndQuery = {}
 	xmlAndQueryCounter = 0
@@ -89,11 +90,8 @@ def xml_handler (xml_string) :
 
 	xml = xmlAndQuery[0]
 	query = xmlAndQuery[1]
-	#print "xml:", xml
-	#print "query:", query
 
 	queryLength = len(query)
-	#print "queryLength:", queryLength
 
 	answer = {}
 	occurCount = 0
@@ -101,23 +99,20 @@ def xml_handler (xml_string) :
 	occurSolve = 0 
 	for x in xml.iter():
 		occurAtLine += 1
-		#print "line:", occurAtLine, "item:", x.tag
 		if x.tag == query.tag:
-			#print "found:", x.tag, "==", query.tag
+			assert x.tag == query.tag
 			if queryLength == 0:
+				assert queryLength == 0
 				occurCount += 1
 				answer[occurCount] = occurAtLine
-				#print "occurAtLine:", occurAtLine
 			else:
 				occurSolve = xml_solver(x, query)
 				occurCount += occurSolve
 				if occurSolve != 0:
+					assert occurSolve != 0
 					answer[occurCount] = occurAtLine
-					#print "occurAtLine:", occurAtLine
 	
 	answer[0] = occurCount
-	#print "final occurCount:", occurCount
-	#print answer
 	return answer
 	
 
@@ -138,35 +133,28 @@ def xml_solver(xmlS, queryS):
 		else, we didnt find anything
 			return 0
 	"""
-	#print "\n-------------------- xml_solver starts --------------------"
-	#print "xmlS:", xmlS
-	#print "queryS:", queryS
-
 	queryS_Children = {0:0}
 	queryS_Children_count = 0
 	for x in queryS.getchildren():
 		queryS_Children[queryS_Children_count] = x
 		queryS_Children_count += 1 
-	#print "queryS_Children_count:", queryS_Children_count 
 
 	queryS_length = 0
-	#print "children + grandchildren of queryS:"
+	#print "number of children + grandchildren of queryS:"
 	for x in queryS.iter():
-		#print queryS_length, x.tag
 		queryS_length += 1
-	#print "queryS_length:", queryS_length
 
 	for x in xmlS.getchildren():
 		if x.tag == queryS_Children[0].tag:
-			#print "found a match:", x.tag, "==", queryS_Children[0]
+			assert x.tag == queryS_Children[0].tag
 			if queryS_Children[0].getchildren() == []:
+				assert queryS_Children[0].getchildren() == []
 				#print "found whole query"
 				return 1 
 			elif queryS_length > 1:
+				assert queryS_length > 1
 				#print "call recursively"
 				return xml_solver(x, queryS_Children[0])
 	else:
 		#print "didnt find anything"
 		return 0
-
-
