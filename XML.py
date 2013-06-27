@@ -71,6 +71,8 @@ def xml_handler (xml_string) :
 	return occurCount and occurAtLine
 
 	"""
+	xml_string = xml_string.replace(" ", "")
+	
 	tree = ET.ElementTree(ET.fromstring(xml_string))
 	treeRoot = tree.getroot()
 
