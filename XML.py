@@ -72,7 +72,6 @@ def xml_handler (xml_string) :
 
 	"""
 	xml_string = xml_string.replace(" ", "")
-	
 	tree = ET.ElementTree(ET.fromstring(xml_string))
 	treeRoot = tree.getroot()
 
@@ -121,17 +120,28 @@ def xml_handler (xml_string) :
 # -----------
 # xml_solver
 # -----------
-def xml_solver(xmlS, queryS):
+def xml_solver(xmlS, queryS, sibling = 0, sibling_num = 0, sibling_ChildrenList = 0):
 	"""
 	xmlS = xml tree
-	querryS = querry
-	find children of querryS since the parent is found in xml_handler
-	get the querryS_length
+	queryS = query
+	find children of queryS since the parent is found in xml_handler
+	get the queryS_length
 	find the element in xml tree that matches the child of queryS
-		if child of queryS has no children then we are at the end of query
-			return 1
-		if queryS_length is more than 1, we still have more elements to search for
-			call xml_solver recursively, passing in the chilren of queryS
+		determine if we are looking for a child of queryS or a sibling of a child of queryS
+			sibling:
+				if sibling doesnt have kids nor siblings left
+					return 1
+				if sibling doesnt have kids and have siblings
+					call xml_solve recursively on the next sibling
+				if sibling have kids
+					call xml_solve recursively on the kids of the sibling
+			child:
+				if child doesnt have kids nor siblings left
+					return 1
+				if child doesnt have kids and have siblings
+					call xml_solve recursively on the next sibling
+				if child have kids
+					call xml_solve recursively on the kids of the child
 		else, we didnt find anything
 			return 0
 	"""
@@ -142,21 +152,38 @@ def xml_solver(xmlS, queryS):
 		queryS_Children_count += 1 
 
 	queryS_length = 0
-	#print "number of children + grandchildren of queryS:"
 	for x in queryS.iter():
 		queryS_length += 1
 
+	children_count = 0
+	last_child = queryS_Children_count -1
 	for x in xmlS.getchildren():
-		if x.tag == queryS_Children[0].tag:
-			assert x.tag == queryS_Children[0].tag
-			if queryS_Children[0].getchildren() == []:
-				assert queryS_Children[0].getchildren() == []
-				#print "found whole query"
+		# if this xml_solver is for a sibling
+		if sibling != 0:
+			if x.tag == sibling.tag:
+				# if sibling doesnt have children and current child x is last child
+				if sibling.getchildren() == [] and sibling_num == last_child:
+					return 1
+				# if sibling doesnt have children and sibling is not last child
+				elif sibling.getchildren() == [] and sibling_num != last_child:
+					return xml_solver(xmlS, queryS, sibling_ChildrenList[sibling_num + 1], sibling_num + 1, sibling_ChildrenList)
+				# if sibling has children
+				elif queryS_length > 1:
+					assert queryS_length > 1
+					return xml_solver(x, queryS_Children[sibling_num])
+
+		elif x.tag == queryS_Children[children_count].tag:
+			assert x.tag == queryS_Children[children_count].tag
+			# if child x doesnt have children and x is last child
+			if queryS_Children[children_count].getchildren() == [] and children_count == last_child:
+				assert queryS_Children[children_count].getchildren() == []
 				return 1 
+			# if child x doesnt have children and child x is not last child
+			elif queryS_Children[children_count].getchildren() == [] and children_count != last_child:
+				return xml_solver(xmlS, queryS, queryS_Children[children_count + 1], children_count + 1, queryS_Children)
+			# if child x has children
 			elif queryS_length > 1:
 				assert queryS_length > 1
-				#print "call recursively"
-				return xml_solver(x, queryS_Children[0])
+				return xml_solver(x, queryS_Children[children_count])
 	else:
-		#print "didnt find anything"
 		return 0
