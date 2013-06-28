@@ -1,0 +1,78 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module XML</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>XML</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/v/filer4b/v38q001/hnp248/cs373/XML/final/XML.py">/v/filer4b/v38q001/hnp248/cs373/XML/final/XML.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="xml.etree.ElementTree.html">xml.etree.ElementTree</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-xml_handler"><strong>xml_handler</strong></a>(xml_string)</dt><dd><tt>xml_string&nbsp;=&nbsp;string&nbsp;that&nbsp;holds&nbsp;the&nbsp;input<br>
+convert&nbsp;xml_string&nbsp;into&nbsp;a&nbsp;tree<br>
+get&nbsp;its&nbsp;children<br>
+child&nbsp;0&nbsp;=&nbsp;xml&nbsp;tree,&nbsp;child&nbsp;1&nbsp;=&nbsp;query<br>
+occurCount&nbsp;=&nbsp;occurences&nbsp;of&nbsp;query&nbsp;in&nbsp;xml&nbsp;tree<br>
+occurAtLine&nbsp;=&nbsp;query&nbsp;occurs&nbsp;at&nbsp;line<br>
+if&nbsp;query&nbsp;has&nbsp;only&nbsp;1&nbsp;item<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check&nbsp;for&nbsp;that&nbsp;item&nbsp;in&nbsp;xml&nbsp;tree&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keep&nbsp;track&nbsp;of&nbsp;occurCount,&nbsp;occurAtLine<br>
+if&nbsp;query&nbsp;has&nbsp;more&nbsp;than&nbsp;1&nbsp;item<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;check&nbsp;for&nbsp;the&nbsp;first&nbsp;item&nbsp;in&nbsp;xml&nbsp;tree<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;xml_solver,&nbsp;pass&nbsp;in&nbsp;current&nbsp;x&nbsp;element&nbsp;in&nbsp;xml&nbsp;tree&nbsp;and&nbsp;query<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;xml_solver&nbsp;sees&nbsp;that&nbsp;current&nbsp;x&nbsp;element&nbsp;has&nbsp;all&nbsp;items&nbsp;in&nbsp;the&nbsp;query<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keep&nbsp;track&nbsp;occurCount,&nbsp;occurAtLine<br>
+return&nbsp;occurCount&nbsp;and&nbsp;occurAtLine</tt></dd></dl>
+ <dl><dt><a name="-xml_printer"><strong>xml_printer</strong></a>(w, answer)</dt><dd><tt>w&nbsp;=&nbsp;writer<br>
+answer&nbsp;=&nbsp;dictionary&nbsp;that&nbsp;holds&nbsp;the&nbsp;items&nbsp;to&nbsp;print<br>
+go&nbsp;through&nbsp;answer&nbsp;and&nbsp;print&nbsp;out&nbsp;every&nbsp;item&nbsp;in&nbsp;that&nbsp;dictionary</tt></dd></dl>
+ <dl><dt><a name="-xml_reader"><strong>xml_reader</strong></a>(r, w)</dt><dd><tt>r&nbsp;=&nbsp;reader<br>
+w&nbsp;=&nbsp;writer<br>
+concatenate&nbsp;every&nbsp;line&nbsp;in&nbsp;the&nbsp;file&nbsp;into&nbsp;a&nbsp;string&nbsp;until&nbsp;empty&nbsp;line<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;wrap&nbsp;&lt;hphamnk&gt;&nbsp;and&nbsp;&lt;/hphamnk&gt;&nbsp;around&nbsp;the&nbsp;string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;&lt;hphamnk&gt;&nbsp;is&nbsp;the&nbsp;new&nbsp;root,&nbsp;with&nbsp;xml&nbsp;tree&nbsp;as&nbsp;child&nbsp;0&nbsp;and&nbsp;query&nbsp;as&nbsp;child&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.&nbsp;then&nbsp;pass&nbsp;that&nbsp;string&nbsp;into&nbsp;xml_handler<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.&nbsp;print&nbsp;the&nbsp;answer&nbsp;from&nbsp;xml_handler<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.&nbsp;clear&nbsp;the&nbsp;string&nbsp;for&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;input<br>
+then&nbsp;do&nbsp;step&nbsp;1-4&nbsp;again&nbsp;to&nbsp;get&nbsp;the&nbsp;last&nbsp;input&nbsp;from&nbsp;the&nbsp;file</tt></dd></dl>
+ <dl><dt><a name="-xml_solver"><strong>xml_solver</strong></a>(xmlS, queryS, sibling<font color="#909090">=0</font>, sibling_num<font color="#909090">=0</font>, sibling_ChildrenList<font color="#909090">=0</font>)</dt><dd><tt>xmlS&nbsp;=&nbsp;xml&nbsp;tree<br>
+queryS&nbsp;=&nbsp;query<br>
+find&nbsp;children&nbsp;of&nbsp;queryS&nbsp;since&nbsp;the&nbsp;parent&nbsp;is&nbsp;found&nbsp;in&nbsp;xml_handler<br>
+get&nbsp;the&nbsp;queryS_length<br>
+find&nbsp;the&nbsp;element&nbsp;in&nbsp;xml&nbsp;tree&nbsp;that&nbsp;matches&nbsp;the&nbsp;child&nbsp;of&nbsp;queryS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;determine&nbsp;if&nbsp;we&nbsp;are&nbsp;looking&nbsp;for&nbsp;a&nbsp;child&nbsp;of&nbsp;queryS&nbsp;or&nbsp;a&nbsp;sibling&nbsp;of&nbsp;a&nbsp;child&nbsp;of&nbsp;queryS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sibling:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;sibling&nbsp;doesnt&nbsp;have&nbsp;kids&nbsp;nor&nbsp;siblings&nbsp;left<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;sibling&nbsp;doesnt&nbsp;have&nbsp;kids&nbsp;and&nbsp;have&nbsp;siblings<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;xml_solve&nbsp;recursively&nbsp;on&nbsp;the&nbsp;next&nbsp;sibling<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;sibling&nbsp;have&nbsp;kids<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;xml_solve&nbsp;recursively&nbsp;on&nbsp;the&nbsp;kids&nbsp;of&nbsp;the&nbsp;sibling<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;child:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;child&nbsp;doesnt&nbsp;have&nbsp;kids&nbsp;nor&nbsp;siblings&nbsp;left<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;child&nbsp;doesnt&nbsp;have&nbsp;kids&nbsp;and&nbsp;have&nbsp;siblings<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;xml_solve&nbsp;recursively&nbsp;on&nbsp;the&nbsp;next&nbsp;sibling<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;child&nbsp;have&nbsp;kids<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;xml_solve&nbsp;recursively&nbsp;on&nbsp;the&nbsp;kids&nbsp;of&nbsp;the&nbsp;child<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else,&nbsp;we&nbsp;didnt&nbsp;find&nbsp;anything<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;0</tt></dd></dl>
+</td></tr></table>
+</body></html>
