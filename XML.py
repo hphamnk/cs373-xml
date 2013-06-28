@@ -161,11 +161,14 @@ def xml_solver(xmlS, queryS, sibling = 0, sibling_num = 0, sibling_ChildrenList 
 		# if this xml_solver is for a sibling
 		if sibling != 0:
 			if x.tag == sibling.tag:
+				assert x.tag == sibling.tag
 				# if sibling doesnt have children and current child x is last child
 				if sibling.getchildren() == [] and sibling_num == last_child:
+					assert sibling.getchildren() == [] and sibling_num == last_child
 					return 1
 				# if sibling doesnt have children and sibling is not last child
 				elif sibling.getchildren() == [] and sibling_num != last_child:
+					assert sibling.getchildren() == [] and sibling_num != last_child
 					return xml_solver(xmlS, queryS, sibling_ChildrenList[sibling_num + 1], sibling_num + 1, sibling_ChildrenList)
 				# if sibling has children
 				elif queryS_length > 1:
@@ -176,10 +179,11 @@ def xml_solver(xmlS, queryS, sibling = 0, sibling_num = 0, sibling_ChildrenList 
 			assert x.tag == queryS_Children[children_count].tag
 			# if child x doesnt have children and x is last child
 			if queryS_Children[children_count].getchildren() == [] and children_count == last_child:
-				assert queryS_Children[children_count].getchildren() == []
+				queryS_Children[children_count].getchildren() == [] and children_count == last_child
 				return 1 
 			# if child x doesnt have children and child x is not last child
 			elif queryS_Children[children_count].getchildren() == [] and children_count != last_child:
+				assert queryS_Children[children_count].getchildren() == [] and children_count != last_child
 				return xml_solver(xmlS, queryS, queryS_Children[children_count + 1], children_count + 1, queryS_Children)
 			# if child x has children
 			elif queryS_length > 1:

@@ -1,0 +1,109 @@
+commit 5aaaf8bbcb05bd256cd3815f10b45b04b850ece1
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Thu Jun 27 21:16:04 2013 -0500
+
+    Added XML.html, Updated SphereXML.py
+
+commit 080984233c85ebc55bf753b41c9413b0358099fc
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Thu Jun 27 20:57:01 2013 -0500
+
+    Updated RunXML.in, XML.py now works with siblings
+
+commit c9b872166554b2301fce5013e03b60e419d39b9c
+Author: youngseo <young.seo13@gmail.com>
+Date:   Thu Jun 27 16:04:32 2013 -0500
+
+    Update XML.py
+
+commit fefd92811b19961ed11d06fc2a42ad813b6489cf
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Wed Jun 26 19:58:58 2013 -0500
+
+    Finished TestXML.py, TestXML.out
+
+commit 782e5c34a862f4f42113d90ae3b467f0b3ed6691
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Tue Jun 25 20:51:21 2013 -0500
+
+    Added TestXML.py
+
+commit e90014d0bfe8e453864105e7d7ae5d3139e45ca7
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Tue Jun 25 12:05:44 2013 -0500
+
+    Added definitions in XML.py
+
+commit 4771e910e56ec0e75fe676759404074a0e99159b
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Tue Jun 25 10:10:29 2013 -0500
+
+    Supports multiple inputs
+
+commit ce22534114cef65d126615ac617e2d68ce1bf550
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Mon Jun 24 00:37:28 2013 -0500
+
+    Multi level works
+
+commit 12d0b377d65bf27192566deeaa7923f75007ecc3
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Sun Jun 23 23:14:08 2013 -0500
+
+    XML Solve doesn't need lastTarget
+
+commit b98d7af0d6ef49201de9f91262c93a0dfaf852a7
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Sun Jun 23 20:39:20 2013 -0500
+
+    XML Handler now works with query tree with 1 child per level
+
+commit 142646c4422341b3b7605fff67dbe1b1f89d1d5b
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Sun Jun 23 18:58:36 2013 -0500
+
+    Solved query tree
+
+commit c334681e80487ba973d5413b014ebac8fb94faf9
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Sun Jun 23 01:06:13 2013 -0500
+
+    XML Handler works with querry length 1 to n
+
+commit 7fbb539889f6bbe40a81748289f84c8e768cc6d8
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Sun Jun 23 00:30:27 2013 -0500
+
+    XML Handler now works with XML Reader
+
+commit 2377c2847dbfeb901586e216f1e9950374e4e4c0
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Sun Jun 23 00:27:12 2013 -0500
+
+    Implemented XML Reader
+
+commit 6dec274106f804447efc74c9b0e48c9f2be75362
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Thu Jun 20 14:14:03 2013 -0500
+
+    Done with numbering
+    
+    split xml and list
+    flexible with list
+
+commit 66cb10b0833a5be8e22452f9018cfbc6e2913d95
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Thu Jun 20 10:58:50 2013 -0500
+
+    Solved using hard coded querry
+    
+    Need:
+    split xml and querry
+    solve querry with more than 2 items
+    keep track of xml item number
+
+commit e67c5afe8ed66c20339efb64b363e6bf982600ff
+Author: Hoang Pham <hphamnk@yahoo.com>
+Date:   Thu Jun 20 05:40:59 2013 -0500
+
+    Initial Commit
